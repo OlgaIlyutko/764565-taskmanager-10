@@ -456,18 +456,18 @@ const createLoadButtonTemplate = () => {
   return (`<button class="load-more" type="button">load more</button>`);
 };
 
-const render = (container, template, place = 'beforeend') => {
+const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
 
-const siteMainElement = document.querySelector('.main');
-const siteHeaderElement = document.querySelector('.main__control');
+const siteMainElement = document.querySelector(`.main`);
+const siteHeaderElement = document.querySelector(`.main__control`);
 render(siteHeaderElement, createSiteMenuTemplate());
 render(siteMainElement, createSiteFilterTemplate());
 render(siteMainElement, createBoardTemplate());
 
-const taskListElement = siteMainElement.querySelector('.board__tasks');
-render(taskListElement, createTaskEditTemplate(), 'beforeend');
+const taskListElement = siteMainElement.querySelector(`.board__tasks`);
+render(taskListElement, createTaskEditTemplate(), `beforeend`);
 
 new Array(TASK_COUNT)
   .fill(``)
@@ -475,4 +475,4 @@ new Array(TASK_COUNT)
       () => render(taskListElement, createTaskTemplate())
   );
 
-render(taskListElement, createLoadButtonTemplate(), 'afterend');
+render(taskListElement, createLoadButtonTemplate(), `afterend`);
