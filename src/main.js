@@ -467,6 +467,6 @@ render(siteMainElement, createBoardTemplate());
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 render(taskListElement, createTaskEditTemplate());
 
-Array.from({length:TASK_COUNT},() => render(taskListElement, createTaskTemplate()));
+Array.from({length: TASK_COUNT}, () => render(taskListElement, createTaskTemplate()));
 
 render(taskListElement, createLoadButtonTemplate(), `afterend`);
