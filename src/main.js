@@ -452,9 +452,7 @@ const createTaskEditTemplate = () => {
   );
 };
 
-const createLoadButtonTemplate = () => {
-  return (`<button class="load-more" type="button">load more</button>`);
-};
+const createLoadButtonTemplate = () => `<button class="load-more" type="button">load more</button>`;
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -467,12 +465,8 @@ render(siteMainElement, createSiteFilterTemplate());
 render(siteMainElement, createBoardTemplate());
 
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
-render(taskListElement, createTaskEditTemplate(), `beforeend`);
+render(taskListElement, createTaskEditTemplate());
 
-new Array(TASK_COUNT)
-  .fill(``)
-  .forEach(
-      () => render(taskListElement, createTaskTemplate())
-  );
+Array.from({length:TASK_COUNT},() => render(taskListElement, createTaskTemplate()));
 
 render(taskListElement, createLoadButtonTemplate(), `afterend`);
