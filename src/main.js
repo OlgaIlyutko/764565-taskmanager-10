@@ -1,7 +1,9 @@
+'use strict';
+
 const TASK_COUNT = 3;
 
 const createSiteMenuTemplate = () => {
-  return(
+  return (
     `<section class="control__btn-wrap">
       <input
         type="radio"
@@ -34,7 +36,7 @@ const createSiteMenuTemplate = () => {
 };
 
 const createSiteFilterTemplate = () => {
-  return(
+  return (
     `<section class="main__filter filter container">
       <input
         type="radio"
@@ -107,7 +109,7 @@ const createSiteFilterTemplate = () => {
 };
 
 const createBoardTemplate = () => {
-  return(
+  return (
     `<section class="board container">
       <div class="board__filter-list">
         <a href="#" class="board__filter">SORT BY DEFAULT</a>
@@ -121,7 +123,7 @@ const createBoardTemplate = () => {
 };
 
 const createTaskTemplate = () => {
-  return(
+  return (
     `<article class="card card--black">
       <div class="card__form">
         <div class="card__inner">
@@ -191,7 +193,7 @@ const createTaskTemplate = () => {
 };
 
 const createTaskEditTemplate = () => {
-  return(
+  return (
     `<article class="card card--edit card--yellow card--repeat">
       <form class="card__form" method="get">
         <div class="card__inner">
@@ -451,7 +453,7 @@ const createTaskEditTemplate = () => {
 };
 
 const createLoadButtonTemplate = () => {
-  return(`<button class="load-more" type="button">load more</button>`);
+  return (`<button class="load-more" type="button">load more</button>`);
 };
 
 const render = (container, template, place = 'beforeend') => {
@@ -470,7 +472,7 @@ render(taskListElement, createTaskEditTemplate(), 'beforeend');
 new Array(TASK_COUNT)
   .fill(``)
   .forEach(
-    () => render(taskListElement, createTaskTemplate())
+      () => render(taskListElement, createTaskTemplate())
   );
 
 render(taskListElement, createLoadButtonTemplate(), 'afterend');
