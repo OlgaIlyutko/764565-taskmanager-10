@@ -30,12 +30,9 @@ const createSiteMenuTemplate = () =>
     <label for="control__statistic" class="control__label"
       >STATISTICS</label
     >
-  </section>`
-);
-};
+  </section>`;
 
-const createSiteFilterTemplate = () => {
-return (
+const createSiteFilterTemplate = () => 
   `<section class="main__filter filter container">
     <input
       type="radio"
@@ -105,19 +102,16 @@ return (
     >
   </section>`;
 
-const createBoardTemplate = () => {
-  return (
-    `<section class="board container">
-      <div class="board__filter-list">
-        <a href="#" class="board__filter">SORT BY DEFAULT</a>
-        <a href="#" class="board__filter">SORT BY DATE up</a>
-        <a href="#" class="board__filter">SORT BY DATE down</a>
-      </div>
+const createBoardTemplate = () => 
+  `<section class="board container">
+    <div class="board__filter-list">
+      <a href="#" class="board__filter">SORT BY DEFAULT</a>
+      <a href="#" class="board__filter">SORT BY DATE up</a>
+      <a href="#" class="board__filter">SORT BY DATE down</a>
+    </div>
 
-      <div class="board__tasks"></div>
-    </section>`
-  );
-};
+    <div class="board__tasks"></div>
+  </section>`;
 
 const createTaskTemplate = () => {
   return (
