@@ -1,5 +1,5 @@
 const getRandomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return min + Math.floor(max * Math.random());
 };
 
 const getRandomArrayItem = (array) => {
@@ -12,7 +12,7 @@ const Descriptions = [
   `Пройти интенсив на соточку`
 ];
 
-const RepeatingDays = () => {
+const RepeatingDays = {
   'mo': false,
   'tu': false,
   'we': false,
@@ -40,12 +40,8 @@ const getRandomDate = () => {
   return targetDate;
 };
 
-const getRandomDueDate = () => {
-  return Math.random() > 0.5 ? null : getRandomDate();
-};
-
 const getRepeatingDays = () => {
-  return Object.assign({}, DefaultRepeatingDays, {
+  return Object.assign({}, RepeatingDays, {
     'mo': Math.random() > 0.5,
   });
 };
@@ -57,16 +53,17 @@ const getRandomTags = (tags) => {
 };
 
 const generateTask = () => {
+  const dueDate = Math.random() > 0.5 ? null : getRandomDate();
   return {
     description: getRandomArrayItem(Descriptions),
-    dueDate: getRandomDueDate(),
+    dueDate,
     repeatingDays: dueDate ? RepeatingDays : getRepeatingDays(),
     tags: new Set(getRandomTags(Tags)),
     color: getRandomArrayItem(Colors),
     isFavorite: Math.random() > 0.5,
     isArchive: Math.random() > 0.5
-  }
-}
+  };
+};
 
 const generateTasks = (count) => {
   return Array.from({length: count}, () => generateTask());
