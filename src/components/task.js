@@ -64,3 +64,4 @@ export const createTaskTemplate = () =>
         </div>
     </div>
   </article>`;
+
