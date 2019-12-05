@@ -38,7 +38,7 @@ const renderTask = (taskListElement, task) => {
 
   editButton.addEventListener(`click`, () => {
     replaceTaskToEdit();
-    document.addEventListener(`keydown`, onEscKeyDown)
+    document.addEventListener(`keydown`, onEscKeyDown);
   });
 
   const taskEditComponent = new TaskEditComponent(task);
