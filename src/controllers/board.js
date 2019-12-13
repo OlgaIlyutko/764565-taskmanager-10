@@ -2,7 +2,7 @@ import LoadMoreButtonComponent from '../components/load-more-button.js';
 import TasksComponent from '../components/tasks.js';
 import SortComponent, {SortType} from '../components/sort.js';
 import NoTasksComponent from '../components/no-tasks.js';
-import {render, remove, replace, RenderPosition} from '../utils/render.js';
+import {render, remove, RenderPosition} from '../utils/render.js';
 import TaskController from './task.js';
 
 const SHOWING_TASKS_COUNT_ON_START = 8;
@@ -30,10 +30,16 @@ export default class BoardController {
     this._sortComponent = new SortComponent();
     this._tasksComponent = new TasksComponent();
     this._loadMoreButtonComponent = new LoadMoreButtonComponent();
+
+    this._onDataChange = this._onDataChange.bind(this);
+    this._onSortTypeChange = this._onSortTypeChange.bind(this);
+    this._onViewChange = this._onViewChange.bind(this);
+
+    this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
   }
 
   render(tasks) {
-    this._tasks = tasks;    
+    this._tasks = tasks;
 
     const container = this._container.getElement();
     const isAllTasksArchived = this._tasks.every((task) => task.isArchive);
@@ -52,37 +58,37 @@ export default class BoardController {
     this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
 
     this._renderLoadMoreButton();
-  }    
+  }
 
   _onSortTypeChange(sortType) {
-      let sortedTasks = [];
+    let sortedTasks = [];
 
-      switch (sortType) {
-        case SortType.DATE_UP:
-          sortedTasks = tasks.slice().sort((a, b) => a.dueDate - b.dueDate);
-          break;
-        case SortType.DATE_DOWN:
-          sortedTasks = tasks.slice().sort((a, b) => b.dueDate - a.dueDate);
-          break;
-        case SortType.DEFAULT:
-          sortedTasks = tasks.slice(0, showingTasksCount);
-          break;
-      }
+    switch (sortType) {
+      case SortType.DATE_UP:
+        sortedTasks = this._tasks.slice().sort((a, b) => a.dueDate - b.dueDate);
+        break;
+      case SortType.DATE_DOWN:
+        sortedTasks = this._tasks.slice().sort((a, b) => b.dueDate - a.dueDate);
+        break;
+      case SortType.DEFAULT:
+        sortedTasks = this._tasks.slice(0, this._showingTasksCount);
+        break;
+    }
 
-      const taskListElement = this._tasksComponent.getElement();
-      taskListElement.innerHTML = ``;
+    const taskListElement = this._tasksComponent.getElement();
+    taskListElement.innerHTML = ``;
 
-      const newTasks = renderTasks(taskListElement, sortedTasks, this._onDataChange, this._onViewChange);
-      this._showedTaskControllers = newTasks;
+    const newTasks = renderTasks(taskListElement, sortedTasks, this._onDataChange, this._onViewChange);
+    this._showedTaskControllers = newTasks;
 
-      if (sortType === SortType.DEFAULT) {
-        this._renderLoadMoreButton();
-      } else {
-        remove(this._loadMoreButtonComponent);
-      }
-  }  
+    if (sortType === SortType.DEFAULT) {
+      this._renderLoadMoreButton();
+    } else {
+      remove(this._loadMoreButtonComponent);
+    }
+  }
 
-  _renderLoadMoreButton = () => {
+  _renderLoadMoreButton() {
     if (this._showingTasksCount >= this._tasks.length) {
       return;
     }
